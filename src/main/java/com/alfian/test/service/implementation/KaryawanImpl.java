@@ -1,7 +1,5 @@
 package com.alfian.test.service.implementation;
 
-import com.alfian.test.dto.DetailKaryawanDto;
-import com.alfian.test.dto.KaryawanDto;
 import com.alfian.test.model.DetailKaryawan;
 import com.alfian.test.model.Karyawan;
 import com.alfian.test.repository.DetailKaryawanRepository;
@@ -22,45 +20,33 @@ public class KaryawanImpl implements KaryawanService {
         this.detailKaryawanRepository = detailKaryawanRepository;
     }
 
-    private KaryawanDto mapToKaryawanDto(Karyawan karyawan) {
-        KaryawanDto karyawanDto = new KaryawanDto();
-        karyawanDto.setId(karyawan.getId());
-        karyawanDto.setCreated_date(karyawan.getCreated_date());
-        karyawanDto.setUpdated_date(karyawan.getUpdated_date());
-        karyawanDto.setDeleted_date(karyawan.getDeleted_date());
-        karyawanDto.setNama(karyawan.getNama());
-        karyawanDto.setDob(karyawan.getDob());
-        karyawanDto.setStatus(karyawan.getStatus());
-        karyawanDto.setAlamat(karyawan.getAlamat());
-        karyawanDto.setDetailKaryawan(mapToDetailKaryawanDto(karyawan.getDetailKaryawan()));
-
-        return karyawanDto;
-    }
-
-    private DetailKaryawanDto mapToDetailKaryawanDto(DetailKaryawan detailKaryawan) {
-        DetailKaryawanDto detailKaryawanDto = new DetailKaryawanDto();
-        detailKaryawanDto.setId(detailKaryawan.getId());
-        detailKaryawanDto.setCreated_date(detailKaryawan.getCreated_date());
-        detailKaryawanDto.setUpdated_date(detailKaryawan.getUpdated_date());
-        detailKaryawanDto.setDeleted_date(detailKaryawan.getDeleted_date());
-        detailKaryawanDto.setNik(detailKaryawan.getNik());
-        detailKaryawanDto.setNpwp(detailKaryawan.getNpwp());
-
-        return detailKaryawanDto;
-    }
-
     @Override
     @Transactional
-    public KaryawanDto saveKaryawan(Karyawan karyawan) {
-        karyawanRepository.save(karyawan);
-        DetailKaryawan dataDetailKry = new DetailKaryawan();
-        dataDetailKry.setNik(karyawan.getDetailKaryawan().getNik());
-        dataDetailKry.setNpwp(karyawan.getDetailKaryawan().getNpwp());
-        dataDetailKry.setKaryawan(karyawan);
+    public Karyawan saveKaryawan(Karyawan karyawan) {
 
-        detailKaryawanRepository.save(dataDetailKry);
+        // Save the Karyawan entity.
+        Karyawan karyawanNew = karyawanRepository.save(karyawan);
 
-        return mapToKaryawanDto(karyawan);
+        // Check if DetailKaryawan already exists for this Karyawan
+        DetailKaryawan existingDetail = detailKaryawanRepository.findById(karyawanNew.getId()).orElse(null);
+
+        if (existingDetail != null) {
+            // Update the existing DetailKaryawan entity.
+            existingDetail.setNik(karyawan.getDetailKaryawan().getNik());
+            existingDetail.setNpwp(karyawan.getDetailKaryawan().getNpwp());
+        } else {
+            // Create and save the new DetailKaryawan entity.
+            DetailKaryawan dataDetailKry = new DetailKaryawan();
+            dataDetailKry.setNik(karyawan.getDetailKaryawan().getNik());
+            dataDetailKry.setNpwp(karyawan.getDetailKaryawan().getNpwp());
+            dataDetailKry.setKaryawan(karyawanNew);
+            existingDetail = detailKaryawanRepository.save(dataDetailKry);
+        }
+
+        // Set the DetailKaryawan to Karyawan to complete the bidirectional link.
+        karyawanNew.setDetailKaryawan(existingDetail);
+        // Save the Karyawan entity again to update it with the associated DetailKaryawan.
+        return karyawanRepository.save(karyawanNew);
     }
 
 }
