@@ -1,6 +1,6 @@
 package com.alfian.test.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +25,9 @@ public class DetailKaryawan extends AbstractDate implements Serializable {
     @Column(name = "npwp", length = 10)
     private String npwp;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @MapsId
     @JoinColumn(name="id_karyawan", referencedColumnName = "id")
+    @JsonBackReference  // This annotation is to omit the back part of the reference to avoid circular reference
     private Karyawan karyawan;
 }

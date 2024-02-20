@@ -1,11 +1,9 @@
 package com.alfian.test.controller;
 
-import com.alfian.test.dto.KaryawanDto;
 import com.alfian.test.model.Karyawan;
 import com.alfian.test.service.KaryawanService;
 import com.alfian.test.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +19,8 @@ public class KaryawanController {
 
     @PostMapping("/save")
     public ResponseEntity<ApiResponse> saveKaryawan(@RequestBody Karyawan karyawan) {
-        KaryawanDto savedKaryawanDto = karyawanService.saveKaryawan(karyawan);
-        ApiResponse response = new ApiResponse(200, "success", savedKaryawanDto);
+        Karyawan karyawanNew = karyawanService.saveKaryawan(karyawan);
+        ApiResponse response = new ApiResponse(200, "success", karyawanNew);
         return ResponseEntity.ok(response);
     }
 

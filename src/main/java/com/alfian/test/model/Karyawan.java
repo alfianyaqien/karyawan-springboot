@@ -1,6 +1,6 @@
 package com.alfian.test.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,7 +38,9 @@ public class Karyawan extends AbstractDate implements Serializable {
     @Column(name = "status", length = 15)
     private String status;
 
-    @OneToOne(mappedBy = "karyawan", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "karyawan", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    @JsonManagedReference  // This annotation is to manage the forward part of the reference
     private DetailKaryawan detailKaryawan;
 
     @OneToMany(mappedBy = "karyawan")
