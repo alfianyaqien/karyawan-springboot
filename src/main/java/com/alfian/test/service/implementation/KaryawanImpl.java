@@ -5,9 +5,12 @@ import com.alfian.test.model.Karyawan;
 import com.alfian.test.repository.DetailKaryawanRepository;
 import com.alfian.test.repository.KaryawanRepository;
 import com.alfian.test.service.KaryawanService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class KaryawanImpl implements KaryawanService {
@@ -47,6 +50,15 @@ public class KaryawanImpl implements KaryawanService {
         karyawanNew.setDetailKaryawan(existingDetail);
         // Save the Karyawan entity again to update it with the associated DetailKaryawan.
         return karyawanRepository.save(karyawanNew);
+    }
+
+    @Override
+    public Karyawan getKaryawanById(Long id) {
+        Optional<Karyawan> karyawan = karyawanRepository.findById(id);
+        if (karyawan.isPresent()) {
+            return karyawan.get();
+        }
+        throw new EntityNotFoundException();
     }
 
 }

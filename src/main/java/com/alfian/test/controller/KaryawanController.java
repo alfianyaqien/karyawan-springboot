@@ -24,4 +24,11 @@ public class KaryawanController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse> getKaryawanById(@PathVariable Long id) {
+        Karyawan karyawan = karyawanService.getKaryawanById(id);
+        ApiResponse response = new ApiResponse(200, "success", karyawan);
+        return ResponseEntity.ok(response);
+    }
+
 }

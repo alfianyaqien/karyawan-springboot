@@ -1,5 +1,6 @@
 package com.alfian.test.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,9 +44,11 @@ public class Karyawan extends AbstractDate implements Serializable {
     @JsonManagedReference  // This annotation is to manage the forward part of the reference
     private DetailKaryawan detailKaryawan;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "karyawan")
     private List<KaryawanTraining> karyawanTrainings;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "karyawan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Rekening> rekenings;
 
