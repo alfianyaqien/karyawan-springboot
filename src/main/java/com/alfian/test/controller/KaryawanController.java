@@ -48,4 +48,11 @@ public class KaryawanController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<ApiResponse> updateKaryawan(@RequestBody Karyawan karyawan) {
+        Karyawan karyawanUpdate = karyawanService.updateKaryawan(karyawan);
+        ApiResponse response = new ApiResponse(200, "success", karyawanUpdate);
+        return ResponseEntity.ok(response);
+    }
+
 }

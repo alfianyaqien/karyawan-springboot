@@ -71,4 +71,18 @@ public class KaryawanImpl implements KaryawanService {
         return karyawanRepository.save(checkIdKaryawan);
     }
 
+    @Override
+    public Karyawan updateKaryawan(Karyawan karyawan) {
+        Karyawan updateKaryawan = karyawanRepository.getById(karyawan.getId());
+
+        updateKaryawan.setNama(karyawan.getNama());
+        updateKaryawan.setDob(karyawan.getDob());
+        updateKaryawan.setAlamat(karyawan.getAlamat());
+        updateKaryawan.setStatus(karyawan.getStatus());
+        updateKaryawan.getDetailKaryawan().setNik(karyawan.getDetailKaryawan().getNik());
+        updateKaryawan.getDetailKaryawan().setNpwp(karyawan.getDetailKaryawan().getNpwp());
+
+        return karyawanRepository.save(updateKaryawan);
+    }
+
 }
