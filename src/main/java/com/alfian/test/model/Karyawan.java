@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "karyawan")
 @ToString
-@EqualsAndHashCode
+@Where(clause = "deleted_date is null")
 public class Karyawan extends AbstractDate implements Serializable {
 
     @Id

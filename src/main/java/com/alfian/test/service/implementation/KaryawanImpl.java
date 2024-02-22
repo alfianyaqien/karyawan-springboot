@@ -5,11 +5,14 @@ import com.alfian.test.model.Karyawan;
 import com.alfian.test.repository.DetailKaryawanRepository;
 import com.alfian.test.repository.KaryawanRepository;
 import com.alfian.test.service.KaryawanService;
+import com.alfian.test.util.ApiResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -59,6 +62,13 @@ public class KaryawanImpl implements KaryawanService {
             return karyawan.get();
         }
         throw new EntityNotFoundException();
+    }
+
+    @Override
+    public Karyawan deleteKaryawan(Karyawan karyawan) {
+        Karyawan checkIdKaryawan = karyawanRepository.getById(karyawan.getId());
+        checkIdKaryawan.setDeleted_date(new Date());
+        return karyawanRepository.save(checkIdKaryawan);
     }
 
 }
