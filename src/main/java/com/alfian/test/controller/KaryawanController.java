@@ -5,6 +5,7 @@ import com.alfian.test.service.KaryawanService;
 import com.alfian.test.util.ApiResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +53,15 @@ public class KaryawanController {
     public ResponseEntity<ApiResponse> updateKaryawan(@RequestBody Karyawan karyawan) {
         Karyawan karyawanUpdate = karyawanService.updateKaryawan(karyawan);
         ApiResponse response = new ApiResponse(200, "success", karyawanUpdate);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<ApiResponse> getAllKaryawan(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size) {
+        Page<Karyawan> karyawanPage = karyawanService.getAllKaryawan(size, page);
+        ApiResponse response = new ApiResponse(200, "Data fetched successfully", karyawanPage);
         return ResponseEntity.ok(response);
     }
 

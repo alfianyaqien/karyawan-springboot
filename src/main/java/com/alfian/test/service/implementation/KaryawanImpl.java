@@ -5,10 +5,11 @@ import com.alfian.test.model.Karyawan;
 import com.alfian.test.repository.DetailKaryawanRepository;
 import com.alfian.test.repository.KaryawanRepository;
 import com.alfian.test.service.KaryawanService;
-import com.alfian.test.util.ApiResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,6 +84,12 @@ public class KaryawanImpl implements KaryawanService {
         updateKaryawan.getDetailKaryawan().setNpwp(karyawan.getDetailKaryawan().getNpwp());
 
         return karyawanRepository.save(updateKaryawan);
+    }
+
+    @Override
+    public Page<Karyawan> getAllKaryawan(int size, int page) {
+        Pageable showData = PageRequest.of(page, size);
+        return karyawanRepository.findAll(showData);
     }
 
 }
