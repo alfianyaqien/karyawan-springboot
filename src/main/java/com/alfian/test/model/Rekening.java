@@ -2,6 +2,7 @@ package com.alfian.test.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Entity
 @ToString
 @EqualsAndHashCode
+@Where(clause = "deleted_date is null")
 public class Rekening extends AbstractDate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

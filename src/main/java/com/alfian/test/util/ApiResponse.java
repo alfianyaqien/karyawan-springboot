@@ -11,6 +11,13 @@ public class ApiResponse {
         this.data = data;
     }
 
+    public boolean chekNull(Object obj){
+        if(obj == null){
+            return true;
+        }
+        return  false;
+    }
+
     public int getCode() {
         return code;
     }

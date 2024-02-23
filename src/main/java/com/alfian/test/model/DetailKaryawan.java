@@ -3,6 +3,7 @@ package com.alfian.test.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
 
@@ -12,8 +13,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "karyawan")
-@EqualsAndHashCode(exclude = "karyawan")
+@Where(clause = "deleted_date is null")
 public class DetailKaryawan extends AbstractDate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

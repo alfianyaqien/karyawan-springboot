@@ -2,6 +2,7 @@ package com.alfian.test.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Where(clause = "deleted_date is null")
 public class KaryawanTraining extends AbstractDate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

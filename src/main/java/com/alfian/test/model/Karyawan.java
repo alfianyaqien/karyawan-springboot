@@ -1,8 +1,10 @@
 package com.alfian.test.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -17,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "karyawan")
 @ToString
-@EqualsAndHashCode
+@Where(clause = "deleted_date is null")
 public class Karyawan extends AbstractDate implements Serializable {
 
     @Id
@@ -43,9 +45,11 @@ public class Karyawan extends AbstractDate implements Serializable {
     @JsonManagedReference  // This annotation is to manage the forward part of the reference
     private DetailKaryawan detailKaryawan;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "karyawan")
     private List<KaryawanTraining> karyawanTrainings;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "karyawan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Rekening> rekenings;
 
