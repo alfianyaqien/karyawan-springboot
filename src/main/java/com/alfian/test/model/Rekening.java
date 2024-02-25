@@ -29,6 +29,9 @@ public class Rekening extends AbstractDate implements Serializable {
     @Column(name = "rekening", length = 10)
     private String rekening;
 
+    @Column(name = "alamat", columnDefinition="TEXT")
+    private String alamat;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     private Karyawan karyawan;
