@@ -9,6 +9,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class RekeningImpl implements RekeningService {
     private final RekeningRepository rekeningRepository;
@@ -25,6 +27,22 @@ public class RekeningImpl implements RekeningService {
         Karyawan checkId = karyawanRepository.findById(id_karyawan).orElseThrow(null);
         rekening.setKaryawan(checkId);
         return rekeningRepository.save(rekening);
+    }
+
+    @Override
+    public Rekening updateRekening(Rekening rekening, Long id_karyawan) {
+        Karyawan checkId = karyawanRepository.findById(id_karyawan).orElseThrow(null);
+        Rekening updateRekening = rekeningRepository.getById(rekening.getId());
+        updateRekening.setNama(rekening.getNama());
+        updateRekening.setJenis(rekening.getJenis());
+        updateRekening.setRekening(rekening.getRekening());
+        updateRekening.setAlamat(rekening.getAlamat());
+        updateRekening.setKaryawan(checkId);
+
+        Date date = new Date(System.currentTimeMillis());
+        updateRekening.setUpdated_date(date);
+
+        return rekeningRepository.save(updateRekening);
     }
 
 }
