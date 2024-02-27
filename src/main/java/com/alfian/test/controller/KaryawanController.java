@@ -44,8 +44,8 @@ public class KaryawanController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<ApiResponse> deleteKaryawan(@RequestBody Karyawan karyawan) {
-        Karyawan karyawanDelete = karyawanService.deleteKaryawan(karyawan);
-        ApiResponse response = new ApiResponse(200, "success", karyawanDelete);
+        karyawanService.deleteKaryawan(karyawan);
+        ApiResponse response = new ApiResponse(200, "success", "success");
         return ResponseEntity.ok(response);
     }
 
