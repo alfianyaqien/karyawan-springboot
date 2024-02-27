@@ -7,9 +7,13 @@ import com.alfian.test.repository.RekeningRepository;
 import com.alfian.test.service.RekeningService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class RekeningImpl implements RekeningService {
@@ -43,6 +47,28 @@ public class RekeningImpl implements RekeningService {
         updateRekening.setUpdated_date(date);
 
         return rekeningRepository.save(updateRekening);
+    }
+
+    @Override
+    public Rekening getRekeningById(Long id) {
+        Optional<Rekening> rekening = rekeningRepository.findById(id);
+        if (rekening.isPresent()) {
+            return rekening.get();
+        }
+        throw new EntityNotFoundException();
+    }
+
+    @Override
+    public Rekening deleteRekening(Rekening rekening) {
+        Rekening checkIdRekening = rekeningRepository.getById(rekening.getId());
+        checkIdRekening.setDeleted_date(new Date());
+        return rekeningRepository.save(checkIdRekening);
+    }
+
+    @Override
+    public Page<Rekening> getAllRekening(int size, int page) {
+        Pageable showData = PageRequest.of(page, size);
+        return rekeningRepository.findAll(showData);
     }
 
 }
