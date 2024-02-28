@@ -1,5 +1,6 @@
 package com.alfian.test.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Where;
@@ -26,9 +27,10 @@ public class Training extends AbstractDate implements Serializable {
     @Column(name = "tema", length = 90)
     private String tema;
 
-    @Column(name = "nama_pengajar", length = 45)
-    private String namaPengajar;
+    @Column(name = "pengajar", length = 45)
+    private String pengajar;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "training", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<KaryawanTraining> karyawanTrainingS;
 }
