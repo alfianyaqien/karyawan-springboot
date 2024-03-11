@@ -1,11 +1,13 @@
 package com.alfian.test.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -14,8 +16,6 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Where(clause = "deleted_date is null")
 public class KaryawanTraining extends AbstractDate implements Serializable {
     @Id
@@ -24,8 +24,8 @@ public class KaryawanTraining extends AbstractDate implements Serializable {
 
     @Column(name = "tanggal_training")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyMMdd")
-    private Date tanggalTraining;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime tanggalTraining;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "training_id", referencedColumnName = "id")
