@@ -1,0 +1,623 @@
+{
+	"info": {
+		"_postman_id": "c8b5bcf3-0c49-4a45-bf3d-ba0345ba1f26",
+		"name": "Karyawan API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29600983"
+	},
+	"item": [
+		{
+			"name": "Karyawan",
+			"item": [
+				{
+					"name": "Add karyawan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\": \"Asep Suhara\",\r\n    \"dob\": \"1998-08-14\",\r\n    \"status\": \"active\",\r\n    \"alamat\": \"Gorontalo\",\r\n    \"detailKaryawan\": {\r\n        \"nik\": \"12907\",\r\n        \"npwp\": \"18276\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/v1/idstar/karyawan/save",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get karyawan by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/v1/idstar/karyawan/23",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete karyawan",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 22\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/karyawan/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update karyawan",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 23,\r\n    \"nama\": \"Asep Abdurrahman\",\r\n    \"dob\": \"1999-03-12T00:00:00.000+00:00\",\r\n    \"alamat\": \"Gorontalo\",\r\n    \"status\": \"active\",\r\n    \"detailKaryawan\": {\r\n        \"id\": 23,\r\n        \"nik\": \"09798\",\r\n        \"npwp\": \"56897\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/karyawan/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list karyawan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/idstar/karyawan/list?page=0&size=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rekening",
+			"item": [
+				{
+					"name": "Add rekening",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\": \"Asep Abdurrahman\",\r\n    \"jenis\": \"BCA\",\r\n    \"rekening\": \"0983765142\",\r\n    \"alamat\": \"Gorontalo\",\r\n    \"karyawan\": {\r\n        \"id\": \"23\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/rekening/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"rekening",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Rekening",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"7\",\r\n    \"nama\": \"Asep Abdurrahman\",\r\n    \"jenis\": \"BNI\",\r\n    \"rekening\": \"3278956208\",\r\n    \"alamat\": \"Gorontalo\",\r\n    \"karyawan\": {\r\n        \"id\": \"23\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/rekening/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"rekening",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get rekening by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/idstar/rekening/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"rekening",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete rekening",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/rekening/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"rekening",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list rekening",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/idstar/rekening/list?page=0&size=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"rekening",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Training",
+			"item": [
+				{
+					"name": "Add training",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tema\": \"Mastering Springboot\",\r\n    \"pengajar\": \"Tedi Setiawadi\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/training/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"training",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update training",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"5\",\r\n    \"tema\": \"Mastering Java Springboot\",\r\n    \"pengajar\": \"Tedi Sutisna\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/training/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"training",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list training",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/idstar/training/list?page=0&size=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"training",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get training by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/idstar/training/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"training",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete training",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/training/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"training",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "KaryawanTraining",
+			"item": [
+				{
+					"name": "Add karyawan-training",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"karyawan\":{\r\n        \"id\":\"23\"\r\n    },\r\n    \"training\":{\r\n        \"id\":\"5\"\r\n    },\r\n    \"tanggalTraining\":\"2024-03-16 14:40:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/karyawan-training/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan-training",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update karyawan-training",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 20,\r\n    \"karyawan\":{\r\n        \"id\":\"23\"\r\n    },\r\n    \"training\":{\r\n        \"id\":\"1\"\r\n    },\r\n    \"tanggalTraining\":\"2024-03-16 14:46:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/karyawan-training/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan-training",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list karyawan-training",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/idstar/karyawan-training/list?page=0&size=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan-training",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get karyawan-training by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/idstar/karyawan-training/20",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan-training",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete karyawan-training",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 11\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/idstar/karyawan-training/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"idstar",
+								"karyawan-training",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}

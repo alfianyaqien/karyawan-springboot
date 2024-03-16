@@ -1,7 +1,6 @@
 package com.alfian.test.controller;
 
 import com.alfian.test.model.KaryawanTraining;
-import com.alfian.test.model.Training;
 import com.alfian.test.service.KaryawanTrainingService;
 import com.alfian.test.util.ApiResponse;
 import jakarta.persistence.EntityNotFoundException;
