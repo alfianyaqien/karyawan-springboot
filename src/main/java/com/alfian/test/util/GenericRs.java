@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/**
- * @author asief
- * @project springboot-idstar, 13/04/2023
- */
 @Component
 public class GenericRs {
 
